@@ -1,18 +1,42 @@
-require 'faraday'
-require 'json'
+load 'hats.rb'
 
-conn = Faraday.new(:url => 'http://steamcommunity.com') do |faraday|
-  faraday.request  :url_encoded             # form-encode POST params
-  faraday.response :logger                  # log requests to STDOUT
-  faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
-end
+require 'money'
+require 'eu_central_bank'
 
-response = conn.get 'market/listings/440/Unusual%20Glengarry%20Bonnet/render/', query: '', start: 0, count: 50
+eu_bank = EuCentralBank.new
+Money.default_bank = eu_bank
+eu_bank.update_rates
+
+response = farady.get 'market/listings/440/Unusual%20Glengarry%20Bonnet/render/', query: '', start: 0, count: 50
 
 body = JSON.parse response.body
 
 class Listing
   attr_accessor :listing_id, :price, :currency, :item
+
+  def money
+    ::Money.new(price, currency_symbol)
+  end
+
+  def usd
+    money.exchange_to(:USD)
+  end
+
+  private
+  def currency_symbol
+    case currency
+    when 2001
+      'USD'
+    when 2002
+      'GBP'
+    when 2003
+      'EUR'
+    when 2005
+      'RUB'
+    else
+      raise "Unknown Currency #{currency}: #{price}"
+    end
+  end
 end
 
 class Item
@@ -65,5 +89,5 @@ listings = body["listinginfo"].values.map do |listing|
 end
 
 listings.each do |listing|
-  puts "#{listing.currency} - #{listing.price} - #{listing.item.effects.map(&:name).join ','}"
+  puts "#{listing.usd.format} - #{listing.item.effects.map(&:name).join ','}"
 end;

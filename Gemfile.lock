@@ -5,6 +5,9 @@ GEM
       timers (~> 1.1.0)
     coderay (1.1.0)
     diff-lcs (1.2.5)
+    eu_central_bank (0.3.7)
+      money (>= 5.0.0)
+      nokogiri
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     ffi (1.9.3)
@@ -25,9 +28,12 @@ GEM
       rb-inotify (>= 0.9)
     lumberjack (1.0.4)
     method_source (0.8.2)
+    mini_portile (0.5.2)
     money (6.0.0)
       i18n (~> 0.6.4)
     multipart-post (1.2.0)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
     pry (0.9.12.4)
       coderay (~> 1.0)
       method_source (~> 0.8)
@@ -51,9 +57,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  eu_central_bank
   faraday
   guard
   guard-rspec
   money
+  nokogiri
   pry
   rspec
