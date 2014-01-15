@@ -17,7 +17,7 @@ describe Hatsrank::Client do
   describe '#listings' do
     use_vcr_cassette
 
-    let(:hat) { Hatsrank::Hat.new client, 'http://steamcommunity.com/market/listings/440/Unusual%20Bombing%20Run' }
+    let(:hat) { Hatsrank::Marketable.new client, 'http://steamcommunity.com/market/listings/440/Unusual%20Bombing%20Run' }
     subject { client.listings hat }
 
     specify { subject.first.item.name.should == "Unusual Bombing Run" }

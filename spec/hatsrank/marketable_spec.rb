@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Hatsrank::Hat do
+describe Hatsrank::Marketable do
   let(:url) { 'http://steamcommunity.com/market/listings/440/Unusual%20Bombing%20Run' }
   let(:client) { Hatsrank::Client.new }
 
-  let(:hat) { Hatsrank::Hat.new client, url }
+  let(:hat) { Hatsrank::Marketable.new client, url }
 
   describe '#listings' do
     let(:hat_list) { 'hats' }

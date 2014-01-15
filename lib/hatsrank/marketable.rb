@@ -1,5 +1,5 @@
 module Hatsrank
-  class Hat
+  class Marketable
     attr_reader :uri
 
     def initialize(client, uri)

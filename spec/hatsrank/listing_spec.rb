@@ -9,6 +9,7 @@ describe Hatsrank::Listing do
     listing.currency = currency
     listing.price = price
   end
+
   describe 'usd' do
     use_vcr_cassette
     subject { listing.usd }

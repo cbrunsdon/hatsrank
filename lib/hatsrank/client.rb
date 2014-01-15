@@ -14,7 +14,7 @@ module Hatsrank
 
       content = Nokogiri::HTML(results_html)
       content.css('.market_listing_row_link').map do |unusual_link|
-        Hat.new self, unusual_link['href']
+        Marketable.new self, unusual_link['href']
       end
 
     end
