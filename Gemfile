@@ -8,6 +8,7 @@ gem 'nokogiri'
 
 # dev gems
 gem 'pry'
+gem 'vcr'
 gem 'rspec'
 gem 'guard'
 gem 'guard-rspec'
