@@ -72,7 +72,6 @@ module Hatsrank
     def effects
       descriptions.select { |x| x.value.match /^Effect/ }
     end
-
   end
 
   class Description
