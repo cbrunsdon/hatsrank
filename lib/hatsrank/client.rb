@@ -1,14 +1,7 @@
-require 'hatsrank/hat'
 require 'faraday'
 require 'json'
 require 'nokogiri'
 require 'money'
-
-require 'eu_central_bank'
-
-eu_bank = EuCentralBank.new
-Money.default_bank = eu_bank
-eu_bank.update_rates
 
 module Hatsrank
   class Client
@@ -66,34 +59,6 @@ module Hatsrank
         faraday.request  :url_encoded             # form-encode POST params
         faraday.response :logger                  # log requests to STDOUT
         faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
-      end
-    end
-  end
-
-  class Listing
-    attr_accessor :listing_id, :price, :currency, :item
-
-    def money
-      ::Money.new(price, currency_symbol)
-    end
-
-    def usd
-      money.exchange_to(:USD)
-    end
-
-    private
-    def currency_symbol
-      case currency
-      when 2001
-        'USD'
-      when 2002
-        'GBP'
-      when 2003
-        'EUR'
-      when 2005
-        'RUB'
-      else
-        raise "Unknown Currency #{currency}: #{price}"
       end
     end
   end

@@ -1,3 +1,4 @@
 require 'hatsrank/version'
-require 'hatsrank/client'
 require 'hatsrank/hat'
+require 'hatsrank/listing'
+require 'hatsrank/client'
