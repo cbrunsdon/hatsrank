@@ -13,8 +13,8 @@ module Hatsrank
       results_html = body["results_html"]
 
       content = Nokogiri::HTML(results_html)
-      content.css('.market_listing_row_link').map do |unusual_link|
-        Marketable.new self, unusual_link['href']
+      content.css('.market_listing_row_link').map do |marketable_link|
+        Marketable.new self, marketable_link['href']
       end
 
     end
@@ -60,17 +60,6 @@ module Hatsrank
         faraday.response :logger                  # log requests to STDOUT
         faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
       end
-    end
-  end
-
-  class Item
-    attr_accessor :name, :descriptions
-    def initialize
-      @descriptions = []
-    end
-
-    def effects
-      descriptions.select { |x| x.value.match /^Effect/ }
     end
   end
 
