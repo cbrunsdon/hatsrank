@@ -8,7 +8,7 @@ module Hatsrank
     end
 
     def listings
-      @client.listings
+      @client.listings self
     end
 
     def info

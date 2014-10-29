@@ -21,7 +21,7 @@ module Hatsrank
 
     private
     def currency_symbol
-      case currency
+      case currency.to_i
       when 2001
         'USD'
       when 2002
